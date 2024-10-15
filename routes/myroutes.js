@@ -10,7 +10,7 @@ router.get('/',(req,res)=>{
             res.status(500).send('Server Error');
             return;
         }
-        res.render('index', { products: results });
+        res.render('index', { products: results }  );
     });
 });
 
@@ -39,6 +39,32 @@ router.get('/product/:id', (req, res) => {
         res.render('product', { product: result[0] });
     });
 });
+
+router.post('/order', (req, res) => {
+    const { productId, quantity } = req.body;
+    db.query('SELECT * FROM products WHERE Product_id = ?', [productId], (err, result) => {
+        if (err) {
+            console.error('Error fetching product details:', err);
+            res.status(500).send('Server Error');
+            return;
+        }
+        if (result.length > 0) {
+            const product = result[0];
+            const totalPrice = parseInt(product.price) * quantity;
+            res.render('order', { product, quantity, totalPrice });
+        } else {
+            res.status(404).send('Product not found');
+        }
+    });
+});
+
+
+//แสดงหน้า login
+router.get('/login',(req,res)=>{
+    res.render('login')
+})
+
+// บันทึกผู้ใช้ที่ login
 
 
 

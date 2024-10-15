@@ -16,39 +16,43 @@
         <img src="<%= product.image %>" alt="<%= product.name %>">
         <div class="details">
             <h1><%= product.name %></h1>
-            <p class="price">Price: <%= product.price %></p>
-            <p class="description"><%= product.description %></p>
-            <p class="stock">Stock: <%= product.stock %></p>
+                <p class="price">Price: <%= product.price %></p>
+                <p class="description"><%= product.description %></p>
+                <p class="stock">Stock: <%= product.stock %></p>
+            
             <div class="rating">
               <span>★★★★★</span>
               <span>( <%= product.reviews %> reviews)</span>
             </div>
 
-                <div class="quantity-selector">
-                  <label for="quantity">Quantity</label>
-                  <button  id="decrease" onclick="updateQuantity(-1)">-</button>
-                  <input type="text" id="quantity" value="1" readonly>
-                  <button id="increase" onclick="updateQuantity(1)">+</button>
-                </div>
+            <div class="quantity-selector">
+                <label for="quantity">Quantity</label>
+                <button  id="decrease" onclick="updateQuantity(-1)">-</button>
+                <input type="text" id="quantity" value="1" readonly>
+                <button id="increase" onclick="updateQuantity(1)">+</button>
+            </div>
 
             <div class="button-group">
-                <button>Add to Cart</button>
-                <button>Buy Now</button>
+                <form action="/order" method="post">
+                    <input type="hidden" name="productId" value="<%= product.Product_id %>">
+                    <input type="hidden" name="quantity" id="order-quantity" value="1">
+                    <button type="submit">Buy Now</button>
+                </form>
             </div>
+
         </div>
     </div>
 </body>
 <script>
-    
-  function updateQuantity(change) {
+function updateQuantity(change) {
     let quantityInput = document.getElementById('quantity');
+    let orderQuantityInput = document.getElementById('order-quantity');
     let currentQuantity = parseInt(quantityInput.value);
     let newQuantity = currentQuantity + change;
 
     if (newQuantity >= 1) {
         quantityInput.value = newQuantity;
-        // อัปเดตฐานข้อมูลที่นี่
-        updateDatabase(newQuantity);
+        orderQuantityInput.value = newQuantity;
     }
 }
 </script>

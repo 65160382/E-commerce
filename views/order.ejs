@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order payment</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/styleorder.css" />
+    <link rel="icon" href="/img/bag.png" type="image/png">
+</head>
+<body>
+    <%- include('partials/header') %>
+    <%- include('partials/slidebar') %>
+
+    <div class="head">
+        <button class="back-btn" onclick="history.back()">กลับไปยังหน้าก่อนหน้า</button>        
+    </div>
+    </div>
+    <div id="order-detail-container" class="order-detail">
+        <img src="<%= product.image %>" alt="<%= product.name %>">
+        <div class="details">
+            <h2><%= product.name %></h2>
+            <p class="price">Price: <%= product.price %></p>
+            <p class="quantity">Quantity: <%= quantity %></p>
+            <p class="total-price">Total Price: <%= totalPrice %></p>
+        </div>
+    </div>
+    <div id="order-detail-address">
+        <h1 class="head-add"><img src="/img/pin.png" alt="Pin Icon" width="20" height="20" /></h1>
+        <div id="user-info"> </div>
+    </div>
+    <div id="order-detail-payment" class="order-payment"></div>
+    <div id="order-detail-summary" class="order-summary"></div>
+</body>
+</html>

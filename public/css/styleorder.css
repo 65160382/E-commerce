@@ -9,12 +9,17 @@
 }
 
 .back-btn {
-  background: none;
+  background-color: #f0f0f0;
   border: none;
-  font-size: 25px;
+  padding: 10px 20px;
+  font-size: 1em;
   cursor: pointer;
-  margin-right: 8px;
-  font-weight: bolder;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.back-btn:hover {
+  background-color: #ddd;
 }
 
 #order-detail-container {

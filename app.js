@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
-const router = require('./routes/myroutes')
+const router = require('./routes/myroutes');
+const session = require('express-session');
 
 const app = express();
 const port = 3000;
@@ -11,6 +12,7 @@ app.set('views',path.join(__dirname,'views')); //อ้างอิง views ท
 
 app.use(express.static(path.join(__dirname,'public'))); //อ้างอิงไฟล์ static ใน floder public
 app.use(express.urlencoded({extended:true}));
+app.use(session({secret: 'secret',resave: false,saveUninitialized: true})); //ใช้งาน session
 
 app.use(router);
 
