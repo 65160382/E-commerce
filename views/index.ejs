@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecondHandMarket</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="/img/bag.png" type="image/png">  
+</head>
+<body>
+    <%- include('partials/header') %>
+    <%- include('partials/slidebar') %>
+    
+    <div class="Search">
+        <form action="/search" method="GET">
+            <input class="Search-bar" id="search-bar" name="search" type="text" placeholder="Search">
+            <button class="Search-butt" type="submit">Search</button>
+        </form>
+    </div>
+
+    <%- include('partials/category') %>
+
+    <div id="search-results" class="Daily-Discover">
+    </div>
+
+    <div id="daily-discover-container" class="Daily-Discover">
+        <% products.forEach(product => { %>
+            <div class="Discover-item">
+                <h3 class="text"><%= product.name %></h3>
+                <img src="<%= product.image %>" alt="<%= product.name %>">
+                <p class="price">Price: <%= product.price %></p>
+            </div>
+        <% }) %>
+    </div>
+        
+</body>
+</html>

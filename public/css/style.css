@@ -1,0 +1,304 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #EEEEEE;
+    margin: 0;
+}
+
+.navbar-brand{
+    color: white;
+    background-color: #F05941;
+    padding: 10px; 
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+} 
+
+.title-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.title-container h1 {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    padding-right: 60px; /* ปรับระยะห่างจากขอบขวาของ h1 ให้มีที่ว่างพอสำหรับไอคอน */
+    cursor: pointer;
+}
+
+.title-container img {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 0; /* ทำให้ไอคอนอยู่ข้างหลัง h1 */
+}
+
+.Search {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.Search-bar {
+    padding: 10px;
+    font-size: 16px;
+    width: 300px;
+    margin-right: 10px;
+    border-radius: 30px;
+    border: none;
+    background-color: rgb(247, 247, 247);
+}
+
+.Search-bar:hover{
+    cursor: pointer;
+}
+
+.Search-butt {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 30px;
+    border: none;
+    color: white;
+    background-color: #F05941
+}
+
+.Search-butt:hover{
+    cursor: pointer;
+}
+
+/* ส่วนประเภทสินค้า */
+.Category-Content{
+    padding: 20px;
+}
+
+.text-Cate{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.category-item {
+    margin: 10px;
+    text-align: center;
+    flex: 1 0 20%; 
+    max-width: 150px;
+}
+
+.img-Cate {
+    display: block;
+    margin: 0 auto 10px auto;
+    border-radius: 20px;
+}
+
+/* ส่วนแสดงสินค้า */
+.Daily-Discover {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.Discover-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ;
+}
+
+.Discover-item:hover {
+    outline: 1px solid orangered;
+    cursor: pointer;
+}
+
+.Discover-item img {
+    width: 100%;
+    height: auto;
+    cursor: pointer; /* ทำให้ภาพสามารถคลิกได้ */
+}
+
+.Discover-item .text {
+    display: block;   
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.Discover-item .price {
+    display: block;
+    padding: 1rem;
+    font-size: 16px;
+    justify-content: space-between;
+    align-items: center;
+    color: #F05941;
+}
+
+
+/* silde bar */
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #f8f8f8ec;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: rgb(10, 10, 10);
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #575757;
+}
+
+.main-content {
+    transition: margin-left 0.5s;
+    padding: 20px;
+}
+
+.sidebar .close-btn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    color: rgb(0, 0, 0);
+}
+
+.open-btn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #F05941;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+}
+
+.open-btn:hover {
+    background-color: #e2e2e2;
+    color: black;
+}
+
+/* ผลลัพธ์ที่แสดงผลจากการดึงฐานข้อมูล */
+#search-results {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center; /* จัดเรียงรายการให้ตรงกลาง */
+}
+
+.product-item {
+    width: 200px; /* กำหนดความกว้างคงที่ */
+    height: 300px; /* กำหนดความสูงคงที่ */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s;
+}
+
+.product-item:hover {
+    outline: 1px solid orangered;
+    cursor: pointer;
+}
+
+.product-item img {
+    width: 100%; /* ปรับขนาดรูปภาพให้พอดีกับ .product-item */
+    height: 70%; /* กำหนดความสูงของรูปภาพ */
+    object-fit: cover; /* ปรับรูปภาพให้พอดีกับพื้นที่ */
+    cursor: pointer; /* ทำให้ภาพสามารถคลิกได้ */
+}
+
+.product-item h3 {
+    display: block;   
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin: 0.5rem 0; /* เพิ่มระยะห่างด้านบนและล่าง */
+}
+
+.product-item p {
+    display: block;
+    font-size: 16px;
+    color: #F05941;
+    margin: 0; /* ลดระยะห่าง */
+}
+
+
+/* สำหรับหน้าจอเล็ก */
+@media (max-width: 768px) {
+    .product-item {
+        width: calc(50% - 20px); /* แสดง 2 คอลัมน์ */
+    }
+}
+
+/* สำหรับหน้าจอมือถือ */
+@media (max-width: 480px) {
+    .product-item {
+        width: 100%; /* แสดง 1 คอลัมน์ */
+    }
+}
+
+/* //profile */
+.main-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* จัดตำแหน่งให้ปุ่ม slide bar อยู่ทางขวา */
+    transition: margin-left 0.5s;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+#profile-icon {
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+#username-display {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center; /* จัดข้อความให้อยู่ตรงกลาง */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,109 @@
+.product-detail {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    max-width: 800px;
+    margin: 40px auto;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.product-detail img {
+    max-width: 300px;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+.product-detail .details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 500px;
+}
+.product-detail h1 {
+    font-size: 2em;
+    margin: 10px 0;
+}
+.product-detail p {
+    font-size: 1.2em;
+    margin: 5px 0;
+}
+.product-detail .price {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #b12704;
+    margin: 10px 0;
+}
+.product-detail .stock {
+    font-size: 1.2em;
+    color: #007600;
+    margin: 10px 0;
+}
+.product-detail .rating {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+.product-detail .rating span {
+    margin-left: 5px;
+    font-size: 1em;
+    color: #555;
+}
+.product-detail button {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #ee4d2d;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 5px;
+}
+.product-detail .button-group button:first-child {
+    background-color: #EEEEEE; 
+    color: black;
+}
+.product-detail .button-group button:first-child:hover {
+    background-color: #5a6268; 
+    color: #fff;
+}
+.product-detail .button-group button:last-child {
+    background-color: #ee4d2d; /
+}
+.product-detail .button-group button:last-child:hover {
+    background-color: #a0341f; 
+}
+
+/* ปุ่มเลือกจำนวน */
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    padding: 5px; /* เพิ่มระยะห่างภายใน */
+    border-radius: 5px; /* เพิ่มความโค้งมน */
+}
+
+.quantity-selector button {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    display: flex; /* ใช้ flexbox */
+    align-items: center; /* จัดให้อยู่ตรงกลางแนวตั้ง */
+    justify-content: center; /* จัดให้อยู่ตรงกลางแนวนอน */
+    color: black;
+}
+
+
+.quantity-selector input {
+    width: 20px;
+    text-align: center;
+    margin: 0 10px;
+    border: none; /* ลบเส้นขอบ */
+    background-color: #fff; /* เพิ่มสีพื้นหลัง */
+    border-radius: 3px; /* เพิ่มความโค้งมน */
+    padding: 3px; /* เพิ่มระยะห่างภายใน */
+}
+

@@ -1,0 +1,139 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f2f5f7;
+    margin: 0;
+    padding: 0;
+}
+
+.payment-success-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
+.payment-success-box {
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    padding: 25px;
+    text-align: center;
+    width: 75%;
+    max-width: 500px;
+}
+
+.logo {
+    width: 60px;
+    margin-bottom: 15px;
+}
+
+.logo2 {
+    width: 150px;
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-size: 22px;
+    color: #333333;
+    margin-bottom: 15px;
+}
+
+.order-id {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 15px;
+}
+
+.order-details p {
+    font-size: 15px;
+    color: #666666;
+    margin-bottom: 10px;
+}
+
+.payment-info {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.payment-info div {
+    width: 30%;
+    text-align: center;
+}
+
+.payment-info i {
+    font-size: 26px;
+    color: #4CAF50;
+    margin-bottom: 8px;
+}
+
+.payment-info p {
+    font-size: 14px;
+    color: #666666;
+}
+
+.payment-info b {
+    color: #333333;
+}
+
+.payment-success-box p {
+    font-size: 14px;
+    color: #666666;
+}
+
+/* Progress Bar */
+.progress-bar {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.step {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #e0e0e0;
+    color: #888888;
+}
+
+.step.completed {
+    background-color: #4CAF50;
+    color: #ffffff;
+}
+
+.step.active {
+    background-color: #FFC107;
+    color: #ffffff;
+}
+
+/* Header */
+.header-container {
+    background-color: #ffffff;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.shop-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    margin: 30px auto;
+}
+
+.shop-details h1 {
+    margin: 0;
+    font-size: 22px;
+    color: #333333;
+}
+
+.shop-details p {
+    margin: 5px 0 0 0;
+    color: #777777;
+}
+
+.shop-status {
+    color: #4CAF50;
+    font-weight: bold;
+}
