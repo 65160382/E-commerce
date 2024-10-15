@@ -1,1 +1,31 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login For Html Css</title>
+    <link rel="stylesheet" href="/css/logins.css">
+    <link rel="icon" href="/img/bag.png" type="image/png">  
+</head>
+<body>
+    <button class="butt-back" onclick="window.location.href='/'"> ⭠ </button>
+    <div class="login-form">
+        <div class="container">
+            <div class="main">               
+                <div class="content">
+                    <h2>Log In</h2>
+                    <form id="loginForm" action="/login" method="POST">
+                        <input type="text" name="username" placeholder="Username" required autofocus="">
+                        <input type="password" name="password" placeholder="Password" required autofocus="">
+                        <button class="btn" type="submit">Login</button>
+                    </form>                    
+                    <p class="account">Don't Have An Account? <a href="/register">Register</a></p>
+                </div>
+                <div class="form-img">
+                    <img src="bg.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

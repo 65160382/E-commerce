@@ -65,8 +65,49 @@ router.get('/login',(req,res)=>{
 })
 
 // บันทึกผู้ใช้ที่ login
+router.post('/login', (req, res) => {
+    const { username, password } = req.body;
 
+    // Query ฐานข้อมูลเพื่อตรวจสอบผู้ใช้
+    db.query('SELECT * FROM register WHERE username = ?', [username], (err, results) => {
+        if (err) {
+            console.error('Error fetching user:', err);
+            res.status(500).send('Server Error');
+            return;
+        }
+        
+        if (results.length > 0) {
+            const user = results[0];
 
+            // ตรวจสอบรหัสผ่าน
+            if (password === user.password) {
+                // บันทึกข้อมูลผู้ใช้ใน session
+                req.session.user = {
+                    id: user.id,
+                    username: user.username,
+                };
+
+                // เปลี่ยนเส้นทางไปยังหน้าแรก
+                res.redirect('/');
+            } else {
+                res.status(401).send('Invalid username or password');
+            }
+        } else {
+            res.status(401).send('Invalid username or password');
+        }
+    });
+});
+
+//logout เพื่อล้าง session 
+router.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).send('Logout Error');
+        }
+        res.clearCookie('connect.sid'); // ลบ cookie ที่เก็บ session ID
+        res.redirect('/');
+    });
+});
 
 
 

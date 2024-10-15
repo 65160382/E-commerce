@@ -14,6 +14,16 @@ app.use(express.static(path.join(__dirname,'public'))); //อ้างอิง�
 app.use(express.urlencoded({extended:true}));
 app.use(session({secret: 'secret',resave: false,saveUninitialized: true})); //ใช้งาน session
 
+app.use((req, res, next) => {
+    // ถ้าผู้ใช้ล็อกอิน ให้ส่ง username ไปกับ response
+    if (req.session.user) {
+        res.locals.username = req.session.user.username;
+    } else {
+        res.locals.username = null; // ตั้งค่าเป็น null ถ้าไม่มีผู้ใช้ล็อกอิน
+    }
+    next();
+});
+
 app.use(router);
 
 
