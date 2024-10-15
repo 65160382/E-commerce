@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style-detail.css">
+    <link rel="icon" href="/img/bag.png" type="image/png">  
+</head>
+<body>
+    <%- include('partials/header') %>
+    <%- include('partials/slidebar') %>
+
+    <div id="product-detail-container" class="product-detail">
+        <img src="<%= product.image %>" alt="<%= product.name %>">
+        <div class="details">
+            <h1><%= product.name %></h1>
+            <p class="price">Price: <%= product.price %></p>
+            <p class="description"><%= product.description %></p>
+            <p class="stock">Stock: <%= product.stock %></p>
+            <div class="rating">
+              <span>★★★★★</span>
+              <span>( <%= product.reviews %> reviews)</span>
+            </div>
+
+                <div class="quantity-selector">
+                  <label for="quantity">Quantity</label>
+                  <button  id="decrease" onclick="updateQuantity(-1)">-</button>
+                  <input type="text" id="quantity" value="1" readonly>
+                  <button id="increase" onclick="updateQuantity(1)">+</button>
+                </div>
+
+            <div class="button-group">
+                <button>Add to Cart</button>
+                <button>Buy Now</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    
+  function updateQuantity(change) {
+    let quantityInput = document.getElementById('quantity');
+    let currentQuantity = parseInt(quantityInput.value);
+    let newQuantity = currentQuantity + change;
+
+    if (newQuantity >= 1) {
+        quantityInput.value = newQuantity;
+        // อัปเดตฐานข้อมูลที่นี่
+        updateDatabase(newQuantity);
+    }
+}
+</script>
+</html>

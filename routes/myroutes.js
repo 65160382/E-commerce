@@ -27,6 +27,20 @@ router.get('/search', (req, res) => {
     });
 });
 
+// เส้นทางสำหรับแสดงรายละเอียดสินค้า
+router.get('/product/:id', (req, res) => {
+    const productId = req.params.id;
+    db.query('SELECT * FROM products WHERE Product_id = ?', [productId], (err, result) => {
+        if (err) {
+            console.error('Error fetching product details:', err);
+            res.status(500).send('Server Error');
+            return;
+        }
+        res.render('product', { product: result[0] });
+    });
+});
+
+
 
 
 

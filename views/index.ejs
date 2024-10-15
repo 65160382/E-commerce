@@ -27,7 +27,9 @@
         <% products.forEach(product => { %>
             <div class="Discover-item">
                 <h3 class="text"><%= product.name %></h3>
-                <img src="<%= product.image %>" alt="<%= product.name %>">
+                <a href="/product/<%= product.Product_id %>">
+                    <img src="<%= product.image %>" alt="<%= product.name %>">
+                </a>
                 <p class="price">Price: <%= product.price %></p>
             </div>
         <% }) %>
