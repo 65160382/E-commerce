@@ -1,0 +1,95 @@
+/* cart.css */
+/* body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 20px;
+  background-color: #f0f0f0;
+} */
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.breadcrumb {
+  background-color: #f8f9fa;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.product-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.quantity-input {
+  width: 50px;
+  text-align: center;
+}
+
+.btn {
+  padding: 6px 12px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn-danger {
+  background-color: #d9534f;
+}
+
+.btn-danger:hover {
+  background-color: #c9302c;
+}
+
+.total {
+  text-align: right;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.action-buttons {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.action-buttons .btn {
+  margin-left: 10px;
+}
+
+.btn-primary {
+  background-color: #337ab7;
+}
+
+.btn-primary:hover {
+  background-color: #286090;
+}
+
+.btn-success {
+  background-color: #5cb85c;
+}
+
+.btn-success:hover {
+  background-color: #449d44;
+}

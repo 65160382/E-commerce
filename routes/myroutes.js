@@ -42,16 +42,31 @@ router.get('/product/:id', (req, res) => {
 
 router.post('/order', (req, res) => {
     const { productId, quantity } = req.body;
+    
+    // สมมติว่าคุณมี query เพื่อดึงข้อมูลสินค้าจาก database
     db.query('SELECT * FROM products WHERE Product_id = ?', [productId], (err, result) => {
         if (err) {
             console.error('Error fetching product details:', err);
             res.status(500).send('Server Error');
             return;
         }
+        
         if (result.length > 0) {
             const product = result[0];
             const totalPrice = parseInt(product.price) * quantity;
-            res.render('order', { product, quantity, totalPrice });
+            
+            // สร้าง array ของสินค้าเพื่อส่งไปยัง template
+            const products = [{
+                image: product.image, // ปรับตามชื่อ field ในฐานข้อมูลของคุณ
+                name: product.name,
+                price: product.price,
+                quantity: quantity
+            }];
+            
+            res.render('chart', { 
+                products: products, 
+                totalPrice: totalPrice 
+            });
         } else {
             res.status(404).send('Product not found');
         }

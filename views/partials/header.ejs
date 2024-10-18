@@ -8,7 +8,7 @@
         <div class="profile-container">
             <img src="/img/profile.png" width="40" height="40" id="profile-icon">
             <% if (username) { %>
-                <span><%= username %></span>
+                <a><%= username %></a>
             <% } else { %>
                 <a href="/login">Login</a>
             <% } %>

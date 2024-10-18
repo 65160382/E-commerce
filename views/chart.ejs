@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order payment</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/chart.css" />
+    <link rel="icon" href="/img/bag.png" type="image/png">
+</head>
+<body>
+    <%- include('partials/header') %>
+    <%- include('partials/slidebar') %>
+
+    <div class="container">
+        <div class="breadcrumb" id="breadcrumb">
+            <!-- หน้าแรก / รายละเอียดสินค้า / ตะกร้าสินค้า -->
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>รูปสินค้า</th>
+                    <th>สินค้า</th>
+                    <th>ราคา/หน่วย</th>
+                    <th>จำนวน</th>
+                    <th>จำนวนเงินรวม</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% products.forEach(function(product) { %>
+                <tr>
+                    <td><img src="<%= product.image %>" alt="<%= product.name %>" class="product-image"></td>
+                    <td><%= product.name %></td>
+                    <td><%= product.price.toFixed(2) %></td>
+                    <td><input type="number" value="<%= product.quantity %>" class="quantity-input"></td>
+                    <td><%= (product.price * product.quantity).toFixed(2) %></td>
+                    <td><button class="btn btn-danger">ลบทิ้ง</button></td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+
+        <div class="total">
+            จำนวนเงินรวมทั้งหมด <%= totalPrice.toFixed(2) %> บาท
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-primary">ดำเนินสินค้าใหม่</button>
+            <button class="btn btn-success">สั่งซื้อสินค้า</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const breadcrumb = document.getElementById('breadcrumb');
+            const path = window.location.pathname.split('/').filter(function(part) {
+                return part !== '';
+            });
+
+            let breadcrumbHTML = '<a href="/">หน้าแรก</a>';
+            let currentPath = '';
+
+            path.forEach(function(part, index) {
+                currentPath += '/' + part;
+                if (index === path.length - 1) {
+                    breadcrumbHTML += ' / ' + part;
+                } else {
+                    breadcrumbHTML += ' / <a href="' + currentPath + '">' + part + '</a>';
+                }
+            });
+
+            breadcrumb.innerHTML = breadcrumbHTML;
+        });
+    </script>
+</body>
+</html>

@@ -4,6 +4,22 @@ body {
     margin: 0;
 }
 
+/* CSS สำหรับตกแต่งแท็ก a ที่แสดงข้อความ Login */
+.profile-container a {
+    color: #ffffff; /* สีของข้อความ */
+    text-decoration: none; /* ลบขีดเส้นใต้ */
+    font-weight: bold; /* ทำให้ข้อความหนา */
+    padding: 5px 10px; /* เพิ่มระยะห่างภายใน */
+    border-radius: 5px; /* มุมโค้งมน */
+    transition: background-color 0.3s, color 0.3s; /* เพิ่มเอฟเฟกต์การเปลี่ยนสี */
+}
+
+.profile-container a:hover {
+    background-color: #ffffff; /* สีพื้นหลังเมื่อเมาส์ชี้ */
+    color: #000000; /* สีของข้อความเมื่อเมาส์ชี้ */
+}
+
+
 .navbar-brand{
     color: white;
     background-color: #F05941;
