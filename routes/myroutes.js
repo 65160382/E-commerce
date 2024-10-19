@@ -61,17 +61,13 @@ router.post('/chart', (req, res) => {
             const product = result[0];
             const totalPrice = parseInt(product.price) * quantity;
 
-            const products = [{
-                image: product.image, 
-                name: product.name,
-                price: product.price,
-                quantity: quantity
-            }];
+            const products = [Object.assign({}, product, { quantity: quantity })];
 
             res.render('chart', { 
                 products: products, 
                 totalPrice: totalPrice, 
-                customer_id: userId // ส่งค่า customer_id ไป
+                customer_id: userId, // ส่งค่า customer_id ไป
+                product_id: productId
             });
         } else {
             res.status(404).send('Product not found');
@@ -181,10 +177,10 @@ router.post('/addproduct',(req,res)=>{
 router.post('/order', (req, res) => {
     const customer_id = req.session.user.id;
     const { product_id, quantity, payment_id, status } = req.body;
-
+    
     // ตรวจสอบว่า product_id ไม่ใช่ค่าว่างหรือ undefined
-    if (!customer_id || !product_id || product_id === '' || product_id === undefined) {
-        return res.status(400).json({ success: false, message: 'Customer ID and Product ID are required' });
+    if (!product_id) {
+        return res.status(400).json({ success: false, message: 'Product ID is required' });
     }
 
     // ดำเนินการเพิ่ม order ถ้า product_id ถูกต้อง

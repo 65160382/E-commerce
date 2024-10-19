@@ -49,10 +49,10 @@
         <% products.forEach(function(product) { %>
             <div class="action-buttons">
                 <form action="/order" method="post">
-                    <input type="hidden" name="product_id" value="<%= product.id %>">
+                    <input type="hidden" name="product_id" value="<%= product.Product_id %>">
                     <input type="hidden" name="customer_id" value="<%= customer_id %>">
                     <input type="hidden" name="quantity" value="<%= product.quantity %>">
-                    <button class="btn btn-success">สั่งซื้อสินค้า</button>
+                    <button type="submit" class="btn btn-success">สั่งซื้อสินค้า</button>
                 </form>
             </div>
         <% }); %>
