@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/chart.css" />
     <link rel="icon" href="/img/bag.png" type="image/png">
+    <script src="js/chart.js"></script>
 </head>
 <body>
     <%- include('partials/header') %>
@@ -32,45 +33,30 @@
                 <tr>
                     <td><img src="<%= product.image %>" alt="<%= product.name %>" class="product-image"></td>
                     <td><%= product.name %></td>
-                    <td><%= product.price.toFixed(2) %></td>
-                    <td><input type="number" value="<%= product.quantity %>" class="quantity-input"></td>
-                    <td><%= (product.price * product.quantity).toFixed(2) %></td>
-                    <td><button class="btn btn-danger">ลบทิ้ง</button></td>
+                    <td data-price="<%= product.price %>"><%= product.price.toFixed(2) %></td>
+                    <td><input type="number" value="<%= product.quantity %>" class="quantity-input" data-id="<%= product.id %>" onchange="updateQuantity(this)"></td>
+                    <td class="total-price"><%= (product.price * product.quantity).toFixed(2) %></td>
+                    <td><button class="btn btn-danger" data-id="<%= product.id %>" onclick="deleteProduct(this)">ลบทิ้ง</button></td>
                 </tr>
                 <% }); %>
             </tbody>
         </table>
 
         <div class="total">
-            จำนวนเงินรวมทั้งหมด <%= totalPrice.toFixed(2) %> บาท
+            จำนวนเงินรวมทั้งหมด <span id="totalPrice"><%= totalPrice.toFixed(2) %></span> บาท
         </div>
-
-        <div class="action-buttons">
-            <button class="btn btn-primary">ดำเนินสินค้าใหม่</button>
-            <button class="btn btn-success">สั่งซื้อสินค้า</button>
-        </div>
+        
+        <% products.forEach(function(product) { %>
+            <div class="action-buttons">
+                <form action="/order" method="post">
+                    <input type="hidden" name="product_id" value="<%= product.id %>">
+                    <input type="hidden" name="customer_id" value="<%= customer_id %>">
+                    <input type="hidden" name="quantity" value="<%= product.quantity %>">
+                    <button class="btn btn-success">สั่งซื้อสินค้า</button>
+                </form>
+            </div>
+        <% }); %>
+        
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const breadcrumb = document.getElementById('breadcrumb');
-            const path = window.location.pathname.split('/').filter(function(part) {
-                return part !== '';
-            });
-
-            let breadcrumbHTML = '<a href="/">หน้าแรก</a>';
-            let currentPath = '';
-
-            path.forEach(function(part, index) {
-                currentPath += '/' + part;
-                if (index === path.length - 1) {
-                    breadcrumbHTML += ' / ' + part;
-                } else {
-                    breadcrumbHTML += ' / <a href="' + currentPath + '">' + part + '</a>';
-                }
-            });
-
-            breadcrumb.innerHTML = breadcrumbHTML;
-        });
-    </script>
 </body>
 </html>

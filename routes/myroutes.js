@@ -40,32 +40,38 @@ router.get('/product/:id', (req, res) => {
     });
 });
 
-router.post('/order', (req, res) => {
+
+router.post('/chart', (req, res) => {
+    const userId = req.session.user ? req.session.user.id : null;
+
+    if (!userId) {
+        return res.status(400).json({ success: false, message: 'User not logged in' });
+    }
+
     const { productId, quantity } = req.body;
-    
-    // สมมติว่าคุณมี query เพื่อดึงข้อมูลสินค้าจาก database
+
     db.query('SELECT * FROM products WHERE Product_id = ?', [productId], (err, result) => {
         if (err) {
             console.error('Error fetching product details:', err);
             res.status(500).send('Server Error');
             return;
         }
-        
+
         if (result.length > 0) {
             const product = result[0];
             const totalPrice = parseInt(product.price) * quantity;
-            
-            // สร้าง array ของสินค้าเพื่อส่งไปยัง template
+
             const products = [{
-                image: product.image, // ปรับตามชื่อ field ในฐานข้อมูลของคุณ
+                image: product.image, 
                 name: product.name,
                 price: product.price,
                 quantity: quantity
             }];
-            
+
             res.render('chart', { 
                 products: products, 
-                totalPrice: totalPrice 
+                totalPrice: totalPrice, 
+                customer_id: userId // ส่งค่า customer_id ไป
             });
         } else {
             res.status(404).send('Product not found');
@@ -74,10 +80,11 @@ router.post('/order', (req, res) => {
 });
 
 
+
 //แสดงหน้า login
 router.get('/login',(req,res)=>{
     res.render('login')
-})
+});
 
 // บันทึกผู้ใช้ที่ login
 router.post('/login', (req, res) => {
@@ -98,10 +105,9 @@ router.post('/login', (req, res) => {
             if (password === user.password) {
                 // บันทึกข้อมูลผู้ใช้ใน session
                 req.session.user = {
-                    id: user.id,
+                    id: user.Customer_id, // เพิ่ม customer_id เข้าไป
                     username: user.username,
                 };
-
                 // เปลี่ยนเส้นทางไปยังหน้าแรก
                 res.redirect('/');
             } else {
@@ -113,6 +119,7 @@ router.post('/login', (req, res) => {
     });
 });
 
+
 //logout เพื่อล้าง session 
 router.get('/logout', (req, res) => {
     req.session.destroy((err) => {
@@ -123,6 +130,74 @@ router.get('/logout', (req, res) => {
         res.redirect('/');
     });
 });
+
+router.get('/register',(req,res)=>{
+    res.render('register')
+});
+
+//บันทึกข้อมูลการลงทะเบียน
+router.post('/register',(req,res)=>{
+
+    const { username, password, firstname, lastname, email, phone } = req.body;
+
+    // Insert into customer table
+    const customerSql = 'INSERT INTO customer (first_name, last_name, email, phone) VALUES (?, ?, ?, ?)';
+    db.query(customerSql, [firstname, lastname, email, phone], (err, result) => {
+        if (err) throw err;
+
+        const customerId = result.insertId;
+
+        // Insert into register table with registration_date
+        const registerSql = 'INSERT INTO register (username, password, customer_id, regis_date) VALUES (?, ?, ?, NOW())';
+        db.query(registerSql, [username, password, customerId], (err, result) => {
+            if (err) throw err;
+            res.redirect('/login');
+        });
+    });
+});
+
+router.get('/addproduct',(req,res)=>{
+    res.render('addproduct')
+});
+
+//เพิ่มสินค้าลงหน้าเว็บ
+router.post('/addproduct',(req,res)=>{
+    const { name, price, description, image, stock } = req.body;
+
+    const sql = "INSERT INTO products (name, price, description, image, stock) VALUES (?, ?, ?, ?, ?)";
+    db.query(sql, [name, price, description, image, stock], (err, result) => {
+        if (err) {
+        console.error("Error inserting product:", err);
+        return res.status(500).json({ error: err.toString() });
+        }
+        res.status(201).json({
+        message: "Product added successfully",
+        productId: result.insertId,
+        });
+    });
+});
+
+//บันทึกข้อมูลคำสั่งซื้อลงตาราง order
+router.post('/order', (req, res) => {
+    const customer_id = req.session.user.id;
+    const { product_id, quantity, payment_id, status } = req.body;
+
+    // ตรวจสอบว่า product_id ไม่ใช่ค่าว่างหรือ undefined
+    if (!customer_id || !product_id || product_id === '' || product_id === undefined) {
+        return res.status(400).json({ success: false, message: 'Customer ID and Product ID are required' });
+    }
+
+    // ดำเนินการเพิ่ม order ถ้า product_id ถูกต้อง
+    const sql = 'INSERT INTO `order` (customer_id, product_id, order_date, quantity, payment_id, status) VALUES (?, ?, NOW(), ?, ?, ?)';
+    db.query(sql, [customer_id, product_id, quantity, payment_id, status], (err, result) => {
+        if (err) {
+            return res.status(500).json({ success: false, message: err.message });
+        }
+        res.status(201).json({ success: true, orderId: result.insertId });
+    });
+});
+
+
 
 
 
