@@ -4,7 +4,7 @@ const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "secondhandmarket", // ชื่อฐานข้อมูล
+    database: "ecommerce", // ชื่อฐานข้อมูล
   });
   
 // เชื่อมต่อฐานข้อมูล
