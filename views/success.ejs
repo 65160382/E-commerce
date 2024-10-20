@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>การสั่งซื้อเสร็จสิ้น</title>
+    <style>
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 1rem;
+        }
+        p {
+            color: #333;
+            font-size: 1.1rem;
+        }
+        .icon {
+            font-size: 4rem;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <%- include('partials/header') %>
+    <%- include('partials/slidebar') %>
+    <div class="container">
+        <div class="icon">✅</div>
+        <h1>ขอบคุณสำหรับการสั่งซื้อ</h1>
+        <p>การสั่งซื้อของคุณเสร็จสมบูรณ์แล้ว</p>
+        <p>หมายเลขคำสั่งซื้อ: <span class="order-number"><%= orderNumber %></span> </p>
+        <p>เราจะจัดส่งสินค้าให้คุณโดยเร็วที่สุด</p>
+        <a href="/">กลับไปยังหน้าหลัก</a>
+    </div>
+</body>
+</html>

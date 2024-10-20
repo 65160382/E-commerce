@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../config/database')
+const db = require('../config/database');
 
 //แสดงข้อมูลในหน้าแรกของเว็บ
 router.get('/',(req,res)=>{
@@ -177,24 +177,32 @@ router.post('/addproduct',(req,res)=>{
 router.post('/order', (req, res) => {
     const customer_id = req.session.user.id;
     const { product_id, quantity, payment_id, status } = req.body;
-    
-    // ตรวจสอบว่า product_id ไม่ใช่ค่าว่างหรือ undefined
+
     if (!product_id) {
         return res.status(400).json({ success: false, message: 'Product ID is required' });
     }
 
-    // ดำเนินการเพิ่ม order ถ้า product_id ถูกต้อง
     const sql = 'INSERT INTO `order` (customer_id, product_id, order_date, quantity, payment_id, status) VALUES (?, ?, NOW(), ?, ?, ?)';
     db.query(sql, [customer_id, product_id, quantity, payment_id, status], (err, result) => {
         if (err) {
             return res.status(500).json({ success: false, message: err.message });
         }
-        res.status(201).json({ success: true, orderId: result.insertId });
+
+    // อัพเดต stock ของสินค้าที่ถูกสั่งซื้อ
+    const updateStockSql = 'UPDATE products SET stock = stock - ? WHERE product_id = ?';
+    db.query(updateStockSql, [quantity, product_id], (err, updateResult) => {
+        if (err) {
+            return res.status(500).json({ success: false, message: err.message });
+        }
+        res.redirect(`/success?orderId=${result.insertId}`);      
+        });
+
     });
 });
 
-
-
-
+router.get('/success',(req,res)=>{
+    const orderId = req.query.orderId;
+    res.render('success', { orderNumber: orderId });
+})
 
 module.exports = router 
